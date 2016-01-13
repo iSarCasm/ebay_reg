@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/ebat_ebay'
+puts "HELLO"
 EbatEbay.instance.run

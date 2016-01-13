@@ -2,7 +2,7 @@ require 'mechanize'
 require 'json'
 require 'singleton'
 require 'faker'
-
+require 'logger'
 require_relative 'app/ebay_api'
 require_relative 'app/IP'
 require_relative 'app/account'
@@ -47,8 +47,10 @@ class EbatEbay
   def retrieve_IP
     @ip = IP.new(@IP_list, @CONFIG_list)
     loop do
-      unless @ip.already_used?
+      puts @ip.ip
+      if @ip.already_used?
         @ip.change
+      else
         break
       end
       sleep 1
