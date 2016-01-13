@@ -5,6 +5,8 @@ require 'faker'
 
 require_relative 'app/ebay_api'
 require_relative 'app/IP'
+require_relative 'app/account'
+require_relative 'app/user'
 
 class EbatEbay
   include Singleton
