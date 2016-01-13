@@ -1,5 +1,5 @@
 class EbayAPI
-  def sign_up(user)
+  def self.sign_up(user)
     agent = Mechanize.new
 
     agent.get 'https://reg.ebay.com/reg/PartialReg?ru='
