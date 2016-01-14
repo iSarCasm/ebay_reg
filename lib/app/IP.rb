@@ -27,7 +27,7 @@ class IP
   protected
 
   def try_to_change_IP
-    cmd = "sudo openvpn --config #{File.expand_path('../config/')}#{@configs.sample}"
+    cmd = "sudo openvpn --config #{File.expand_path('../config/')}/#{@configs.sample}"
     puts "#{cmd}"
     %x[#{cmd}]
   end
