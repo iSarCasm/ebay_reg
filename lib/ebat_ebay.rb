@@ -20,6 +20,7 @@ class EbatEbay
   def run
     retrieve_IP
     @account = EbayAPI.sign_up(generate_user)
+    puts "Finished: #{@account.to_h}"
     save
   end
 
@@ -47,7 +48,6 @@ class EbatEbay
   def retrieve_IP
     @ip = IP.new(@IP_list, @CONFIG_list)
     loop do
-      puts @ip.ip
       if @ip.already_used?
         @ip.change
       else

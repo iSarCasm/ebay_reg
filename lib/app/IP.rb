@@ -12,23 +12,27 @@ class IP
   end
 
   def change
+    puts "\n\nIP: #{ip}\n\n"
     try_to_change_IP
   end
 
   def ip
-    Socket.ip_address_list.detect do |intf|
+    sock_ip = Socket.ip_address_list.detect do |intf|
       intf.ipv4? and
       !intf.ipv4_loopback? and
       !intf.ipv4_multicast? and
       !intf.ipv4_private?
-    end.ip_address
+    end
+    return sock_ip.ip_address if sock_ip
+    return JSON.parse(%x[curl 'https://api.ipify.org?format=json'])["ip"]
   end
 
   protected
 
   def try_to_change_IP
-    cmd = "sudo openvpn --config \"#{@configs.sample}\""
+    cmd = "cd /etc/openvpn/config && sudo openvpn --config \"#{@configs.sample}\""
     puts "#{cmd}"
-    %x[#{cmd}]
+    Kernel.spawn cmd
+    sleep 10
   end
 end
