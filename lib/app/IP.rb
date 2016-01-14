@@ -3,6 +3,7 @@ require 'socket'
 class IP
   def initialize(used_IPs, configs)
     @used_IPs = used_IPs
+    @configs  = configs
     try_to_change_IP
   end
 
@@ -26,7 +27,7 @@ class IP
   protected
 
   def try_to_change_IP
-    cmd = "sudo openvpn —config #{configs.sample}"
+    cmd = "sudo openvpn —config #{@configs.sample}"
     puts "#{cmd}"
     %x[#{cmd}]
   end
