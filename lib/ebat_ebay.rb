@@ -27,7 +27,7 @@ class EbatEbay
 
   def save
     @EMAIL_list.delete(@email)
-    @IP_list.push(@ip)
+    @IP_list.push(@ip.ip)
 
     File.open(File.expand_path('../../db/ip', __FILE__), 'w') do |f|
       f.write(@IP_list.to_json)
@@ -38,7 +38,7 @@ class EbatEbay
     end
 
     accounts = JSON.parse(File.read((File.expand_path('../../db/ebay_accounts', __FILE__))))
-    accounts.push @account
+    accounts.push @account.to_h
     File.open(File.expand_path('../../db/ebay_accounts', __FILE__), 'w') do |f|
       f.write(accounts.to_json)
     end
